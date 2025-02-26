@@ -229,7 +229,17 @@ def image_2dboxes_to_text(imageUrl, rows):
         for position in row:
 
             croppedimg = img[int(position['y']):int(position['y']) + int(position['h']), int(position['x']):int(position['x']) + int(position['w'])]
-            d = pytesseract.image_to_data(croppedimg, output_type=Output.DICT)
+
+            # Create the sharpening kernel
+            kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+
+            # Sharpen the image
+            sharpened_image = cv2.filter2D(croppedimg, -1, kernel)
+
+            #Save the image
+            #cv2.imwrite('crop1.png', sharpened_image)
+
+            d = pytesseract.image_to_data(sharpened_image, output_type=Output.DICT)
 
             text = ""
             l = len(d['text'])

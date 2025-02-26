@@ -1,5 +1,26 @@
-service: tesseract-ocr-service
-runtime: python39
-instance_class: F2 
+# service: tesseract-ocr-service
+# runtime: python39
+# instance_class: F2 
+# env_variables:
+#   APPLICATION_PORT: 8080
+
+service: levenshtein
+runtime: nodejs16
+env: standard
 env_variables:
-  APPLICATION_PORT: 8080
+  # APPLICATION_PORT : "8080"
+  APPLICATION_PORT : "8282"
+  PROJECT : "lv-saas"
+  GCS_UPLOAD_BUCKET : "lv-tennant-spindo-upload-bucket"
+  GCS_PDF_FOLDER : "pdf"
+  GCS_IMAGE_FOLDER : "images"
+  UPLOAD_URL : "https://gcsmanagerapi-dot-lv-saas.et.r.appspot.com"
+  LEVENSHTEIN_API : "https://levenshtein-api-w7smthqjta-et.a.run.app"
+  # LEVENSHTEIN_UM_API : "http://localhost:3000"
+  LEVENSHTEIN_UM_API : "http://localhost:8282"
+  DOWNLOAD_OCR_PROCESSING_PROJECT: "lv-saas"
+  DOWNLOAD_OCR_PROCESSING_BUCKET: "lv-saas-spindo-trigger-cloudfunction"
+  DOWNLOAD_OCR_PROCESSING_FOLDER: "ocrzipfile"
+  DOWNLOAD_OCR_RESULT_PROJECT: "lv-saas"
+  DOWNLOAD_OCR_RESULT_BUCKET: "lv-saas-filedata"
+  DOWNLOAD_OCR_RESULT_FOLDER: "after_process_zip"
